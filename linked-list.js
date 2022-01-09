@@ -81,7 +81,16 @@ class SinglyLinkedList {
       node = node.next;
       count--;
     }
-    return node.val;
+    return node;
+  }
+
+  set(i, val) {
+    const found = this.get(i);
+    if (found) {
+      found.val = val;
+      return true;
+    }
+    return false;
   }
 }
 
@@ -90,20 +99,3 @@ const list = new SinglyLinkedList();
 list.push('HELLOO');
 list.push('GOODBYE');
 list.push('me');
-
-
-// console.log('pop', list.pop());
-// HELLO -> GOODBYE   |return me
-//                             c         
-//           nt
-
-
-// console.log(list, list.length);
-
-console.log(list.get(0));
-
-
-// console.log(list.tail.val);
-// console.log(list.head.val);
-
-// console.log(list);
