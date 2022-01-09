@@ -1,3 +1,4 @@
+// return index position of found node
 function binarySearch(arr: any[], search: any): number {
   let left = 0;
   let right = arr.length -1;
@@ -12,6 +13,7 @@ function binarySearch(arr: any[], search: any): number {
   return -1;
 }
 
+// return value of found node
 function binSearch(arr: any[], elem: number): number {
   let start = 0;
   let end = arr.length -1;
@@ -24,10 +26,10 @@ function binSearch(arr: any[], elem: number): number {
     middle = Math.floor((start + end) /2);
   }
   
-  return arr[middle] === elem ? middle : -1;
+  return arr[middle] === elem ? arr[middle] : -1;
 }
 
-// log(
+// console.log(
 //   binarySearch([1,2,3,4,5,6,7,], 13),
 //   binarySearch([1,2,3,4,5,6,7,8,9], 2),
 //   binarySearch([1,2,3,4,5,6,7,8,9,13,14,15], 3),
@@ -36,7 +38,7 @@ function binSearch(arr: any[], elem: number): number {
 // );
 
 
-// log(
+// console.log(
 //   binSearch([1,2,3,4,5,6,7,], 13),
 //   binSearch([1,2,3,4,5,6,7,8,9], 2),
 //   binSearch([1,2,3,4,5,6,7,8,9,13,14,15], 3),
