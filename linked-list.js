@@ -1,3 +1,5 @@
+const { isWhiteSpaceLike } = require("typescript");
+
 class Node {
   constructor(val) {
     this.val = val;
@@ -118,30 +120,29 @@ class SinglyLinkedList {
     this.length--;
     return removed;
   }
+
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+
+    let next;
+    let prev = null;
+    for (var i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList();
 
-list.push('HELLOO');
-list.push('GOODBYE');
-list.push('me');
-
-
-list.remove(0);
-console.log(list);
-
-// console.log('pop', list.pop());
-// HELLO -> GOODBYE   |return me
-//                             c         
-//           nt
-
-
-// console.log(list, list.length);
-
-// console.log(list.get(0));
-
-
-// console.log(list.tail.val);
-// console.log(list.head.val);
+list.push(120);
+list.push(240);
+list.push(480);
+list.push(960);
 
 // console.log(list);
