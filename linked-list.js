@@ -106,6 +106,18 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+
+  remove(i) {
+    if (i < 0 || i > this.length) return undefined;
+    if (i === this.length - 1) return !!this.pop();
+    if (i === 0) return !!this.shift();
+
+    const node = this.get(i -1);
+    const toDelete = node.next;
+    node.next = toDelete.next;
+    this.length--;
+    return toDelete;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -115,10 +127,7 @@ list.push('GOODBYE');
 list.push('me');
 
 
-console.log(list);
-
-console.log(list.insert(4, 'new head'));
-
+list.remove(0);
 console.log(list);
 
 // console.log('pop', list.pop());
