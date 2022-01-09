@@ -92,6 +92,20 @@ class SinglyLinkedList {
     }
     return false;
   }
+
+  insert(pos, val) {
+    if (pos < 0 || pos > this.length) return false;
+    if (pos === this.length) return !!this.push(val);
+    if (pos <= 0) return !!this.unshift(val);
+
+    const newNode = new Node(val);
+    const prevNode = this.get(pos - 1);
+    const prevNext = prevNode.next;
+    prevNode.next = newNode;
+    newNode.next = prevNext;
+    this.length++;
+    return true;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -99,3 +113,26 @@ const list = new SinglyLinkedList();
 list.push('HELLOO');
 list.push('GOODBYE');
 list.push('me');
+
+
+console.log(list);
+
+console.log(list.insert(4, 'new head'));
+
+console.log(list);
+
+// console.log('pop', list.pop());
+// HELLO -> GOODBYE   |return me
+//                             c         
+//           nt
+
+
+// console.log(list, list.length);
+
+// console.log(list.get(0));
+
+
+// console.log(list.tail.val);
+// console.log(list.head.val);
+
+// console.log(list);
