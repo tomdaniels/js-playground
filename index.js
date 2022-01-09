@@ -1,33 +1,3 @@
-// const token = require('./tkn').trim();
-// const { usersTxnApiV1, streetProfileApiV1 } = require('@domain-group/fe-node-clients');
-
-// const client = usersTxnApiV1({
-//   apiUrl: 'https://no-cdn-s-users-api.baby.domain.com.au',
-//   lifecycle: 'PerRequest',
-// });
-
-// const runClient = async () => {
-//   let response;
-//   try {
-//     response = await client.loanTools.getCalculatorData({
-//       calculator: 'ufc',
-//       accessToken: token,
-//       deviceSessionId: '31eb4506-64df-42a0-9e38-abac4932ab61',
-//       noCache: false,
-//     });
-//   } catch (error) {
-//     console.log('nah mate: ', error);
-//   }
-
-//   console.table(response);
-//   return response;
-// };
-
-// runClient()
-
-
-// ---------------------------------- ^ NODE CLIENT TESTING ^ ---------------------------------- //
-
 const moment = require('moment');
 
 // const todaysDate = moment().format('L'); 
@@ -113,18 +83,6 @@ const doubled = doubleAll(arr);
 
 
 // ---------------------------------- ^ comp ^ ---------------------------------- //
-
-const { homeLoansApiV1 } = require('@domain-group/fe-node-clients');
-
-// const client = homeLoansApiV1({
-//   apiUrl: 'https://stage-home-loans-api.domainloanfinder.com.au',
-// });
-
-// (async () => {
-  // console.log(await client.homeLoanRates());
-// })()
-
-// ---------------------------------- ^ client ^ ---------------------------------- //
 
 const once = require('lodash/once');
 const { unique } = require('underscore');
@@ -416,32 +374,3 @@ function factorial(num){
 // )
 
 // ---------------------------------- ^ factorial recursion ^ ---------------------------------- //
-
-
-const { MongoClient } = require('mongodb');
-
-// const uri = 'mongodb+srv://tomd-io:{PASS}@cluster0.qtwzf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-const client = new MongoClient(uri);
-
-
-async function db() {
-  // Use connect method to connect to the server
-  await client.connect();
-  console.log('Connected successfully to server');
-  const db = client.db('tomd-io');
-  const collection = db.collection('documents');
-
-  // const result = await collection.insertMany([{thing: 1, other: 2, more: 3}]);
-
-  // the following code examples can be pasted here...
-  await collection.deleteMany({thing: 1});
-
-  return collection.find({}).toArray();
-}
-
-db()
-  .then(console.log)
-  .catch(console.error)
-  .finally(() => client.close());
-
-  // ---------------------------------- ^ mongodb ^ ---------------------------------- //
