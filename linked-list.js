@@ -108,15 +108,15 @@ class SinglyLinkedList {
   }
 
   remove(i) {
-    if (i < 0 || i > this.length) return undefined;
+    if (i < 0 || i >= this.length) return undefined;
     if (i === this.length - 1) return !!this.pop();
     if (i === 0) return !!this.shift();
 
     const node = this.get(i -1);
-    const toDelete = node.next;
-    node.next = toDelete.next;
+    const removed = node.next;
+    node.next = removed.next;
     this.length--;
-    return toDelete;
+    return removed;
   }
 }
 
