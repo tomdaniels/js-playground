@@ -1,5 +1,3 @@
-const { isWhiteSpaceLike } = require("typescript");
-
 class Node {
   constructor(val) {
     this.val = val;
