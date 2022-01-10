@@ -8,7 +8,7 @@ for (let i = 1; i < 101; i++) {
       : buzz
         ?'buzz'
         : i;
-  console.log(fizzbuzz);
+  // console.log(fizzbuzz);
 }
 
 /////////////
@@ -76,7 +76,7 @@ function validParens(s: string): boolean {
   return depth === 0;
 }
 
-console.log(validParens('(()(()))'));
+// console.log(validParens('(()(()))'));
 
 ////////////////////
 
@@ -143,7 +143,7 @@ const areThereDuplicates = (...args: any): boolean => {
     return false;
   }
 
-  const lookup: { [key: string]: any } = {};
+  const lookup: Record<string, number> = {};
   for (let item of args) {
     lookup[item] = (lookup[item] || 0) + 1;
   }
@@ -157,7 +157,7 @@ const areThereDuplicates = (...args: any): boolean => {
   return false;
 }
 
-// log(
+// console.log(
 //   areThereDuplicates(1, 2, 3),
 //   areThereDuplicates(1, 2, 2),
 //   areThereDuplicates('a', 'b', 'c', 'a'),
