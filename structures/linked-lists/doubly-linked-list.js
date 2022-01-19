@@ -1,5 +1,3 @@
-const { validateLocaleAndSetLanguage } = require("typescript");
-
 class Node {
   constructor(val) {
     this.value = val;
@@ -43,6 +41,22 @@ class DoublyLinkedList {
 
     this.length--;
     return tail;
+  }
+
+  shift() {
+    if (!this.head) return undefined;
+    const head = this.head;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = head.next;
+      this.head.prev = null;
+      head.prev = null;
+      head.next = null;
+    }
+    this.length--;
+    return head;
   }
 }
 
