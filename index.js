@@ -19,7 +19,7 @@ const result = Object.entries(target)
 
 // ---------------------------------- ^ QUERY PARAM TESTING ^ ---------------------------------- //
 
-const { mapKeys, mapValues } = require('lodash');
+const { mapKeys, mapValues, stubFalse } = require('lodash');
 
 const obj = {
   header: 'sometihg',
@@ -85,10 +85,93 @@ const doubled = doubleAll(arr);
 // ---------------------------------- ^ comp ^ ---------------------------------- //
 
 const once = require('lodash/once');
-const { unique } = require('underscore');
+// const { unique } = require('underscore');
 
 const call = once((thing) => {console.log(thing); return thing});
 
 // console.log(call(1));
 // console.log(call(2));
 // console.log(call(3));
+
+// ---------------------------------- ^ once ^ ---------------------------------- //
+
+const grid = [
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+];
+
+class SudokuSolver {
+  constructor(board) {
+    this.board = board;
+  }
+
+  duplicates(...args) {
+    const lookup = {};
+    for (let item of args) {
+      lookup[item] = (lookup[item] || 0) + 1;
+    }
+    for (let key in lookup) {
+      if (lookup[key] >= 2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getCol(idx) {
+    var column = [];
+    for(var i = 0; i < this.board.length; i++){
+       column.push(this.board[i][idx]);
+    }
+    return column;
+  }
+  
+  validSolution() {
+    let passed = true;
+    let subgridsToCheck = 9;
+    this.board.every((row, i) => {
+      // horizontal
+      if (row.includes(0) || this.duplicates(row)) {
+        passed = false;
+        return false;
+      };
+      
+      // vertical
+      let column = this.getCol(i);
+      if (this.duplicates(...column)) {
+        passed = false;
+        return false;
+      }
+  
+      const subgrids = [[0,3],[3,6],[6,9]];
+      while (subgridsToCheck > 0) {
+        subgrids.every(([x, y]) => {
+          for (let j = 0; j < 3; j++) {
+            const subgrid = this.board.slice(x,y).map(row => row.slice(...subgrids[j]));
+            const block = [].concat(...subgrid); // no .flat support :sad_panda:
+            if (block.includes(0) || this.duplicates(...block)) {
+              subgridsToCheck = 0;
+              passed = false;
+              return false;
+            }
+          }
+          subgridsToCheck--;
+        });
+      }
+    });
+    return passed; 
+  }
+}
+
+const game = new SudokuSolver(grid);
+// console.log(game.validSolution());
+
+// ---------------------------------- ^ sudoku ^ ---------------------------------- //
+
