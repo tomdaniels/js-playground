@@ -99,7 +99,7 @@ class DoublyLinkedList {
 
   set(i, value) {
     const node = this.get(i);
-    if (!node) return undefined;
+    if (typeof node === undefined) return false;
 
     node.value = value;
     return true;
@@ -110,4 +110,4 @@ const dll = new DoublyLinkedList()
 dll.push(99);
 dll.push(100);
 
-// console.log(dll);
+console.log(dll.set(7));
