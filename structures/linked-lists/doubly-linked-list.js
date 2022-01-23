@@ -96,6 +96,14 @@ class DoublyLinkedList {
 
     return node;
   }
+
+  set(i, value) {
+    const node = this.get(i);
+    if (!node) return undefined;
+
+    node.value = value;
+    return true;
+  }
 }
 
 const dll = new DoublyLinkedList()
