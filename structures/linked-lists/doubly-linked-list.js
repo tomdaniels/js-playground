@@ -104,10 +104,27 @@ class DoublyLinkedList {
     node.value = value;
     return true;
   }
+
+    insert(i, value) {
+    if (i < 0 || i > this.length) return false;
+    if (i === 0) return !!this.unshift(value);
+    if (i === this.length) return !!this.push(value);
+
+    const newNode = new Node(value);
+    const prevNode = this.get(i - 1);
+    newNode.next = prevNode.next;
+    newNode.prev = prevNode;
+
+    prevNode.next.prev = newNode;
+    prevNode.next = newNode;
+
+    this.length++;
+    return true;
+  }
 }
 
 const dll = new DoublyLinkedList()
 dll.push(99);
 dll.push(100);
 
-console.log(dll.set(7));
+// console.log(dll);
