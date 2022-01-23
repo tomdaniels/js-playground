@@ -74,7 +74,7 @@ class DoublyLinkedList {
   }
 
   get(i) {
-    if (i < 0 || i >= this.length) return undefined;
+    if (i < 0 || i >= this.length) return null;
 
     let count;
     let node; 
@@ -97,12 +97,14 @@ class DoublyLinkedList {
     return node;
   }
 
-  set(i, value) {
+  set(i, val) {
     const node = this.get(i);
-    if (typeof node === undefined) return false;
+    if (node !== null) {
+      node.val = val;
+      return true;
+    };
 
-    node.value = value;
-    return true;
+    return false;
   }
 
     insert(i, value) {
