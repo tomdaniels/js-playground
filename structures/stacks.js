@@ -5,6 +5,8 @@ class Node {
   }
 }
 
+// stack works as a singly linked list, `shift` and `unshift` items into the stack
+// giving constant time for insert and delete & follow LIFO
 class Stack {
   constructor() {
     this.first = null;
@@ -23,6 +25,20 @@ class Stack {
     }
     this.size++;
     return this;
+  }
+
+  pop() {
+    if (!this.first) return undefined;
+  
+      let current = this.first;
+      this.first = current.next;
+      this.length--;
+  
+      if (this.length === 0) {
+        this.last = null;
+      }
+  
+      return current.value;
   }
 }
 
