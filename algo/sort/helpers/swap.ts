@@ -1,5 +1,5 @@
 /**
- * Swaps to indecies from a given array
+ * Swaps two indecies in a given array
  * @param x the array to mutate
  * @param idx index to swap A
  * @param idj index to swap B
