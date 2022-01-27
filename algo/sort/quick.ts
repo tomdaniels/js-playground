@@ -23,4 +23,4 @@ function quickSort(arr: any[], left: number = 0, right = arr.length -1): any[] {
   return arr;
 } 
          
-// console.log(quickSort([100,-3,2,4,6,9,1,2,5,3,23]));
+console.log(quickSort([100,-3,2,4,6,9,1,2,5,3,23]));

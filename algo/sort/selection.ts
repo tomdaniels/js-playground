@@ -16,4 +16,4 @@ function selectionSort(x: any[]): any[] {
   return x;
 }
 
-// console.log(selectionSort([7,4,5,6,3,2,8]));
+console.log(selectionSort([7,4,5,6,3,2,8]));

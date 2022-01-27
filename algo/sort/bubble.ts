@@ -15,4 +15,4 @@ function bubbleSort(x: number[]): number[] {
   return x;
 }
 
-// console.log(bubbleSort([4,6,5,3,2,1]));
+console.log(bubbleSort([4,6,5,3,2,1]));
