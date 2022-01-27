@@ -215,4 +215,4 @@ function isSubsequence(str1: string, str2: string): boolean {
 // )
 
 
-// ---------------------------------- ^ subsequence challende ^ ---------------------------------- //
+// ---------------------------------- ^ subsequence challenge ^ ---------------------------------- //
