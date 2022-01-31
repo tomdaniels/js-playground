@@ -19,7 +19,7 @@ class Queue {
     this.size = 0;
   }
 
-  enqueue(val: any): Queue {
+  enqueue(val: any): number {
     const node = new QueueNode(val);
     if (!this.first || !this.last) {
       this.first = node;
@@ -28,8 +28,7 @@ class Queue {
       this.last.next = node;
       this.last = node;
     }
-    this.size++;
-    return this;
+    return ++this.size;
   }
 
   dequeue(): Pick<QueueNode, 'value'> | null {
