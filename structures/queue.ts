@@ -19,7 +19,16 @@ class Queue {
     this.size = 0;
   }
 
-  enqueue(_val: any): Queue {
+  enqueue(val: any): Queue {
+    const node = new QueueNode(val);
+    if (!this.first || !this.last) {
+      this.first = node;
+      this.last = node;
+    } else {
+      this.last.next = node;
+      this.last = node;
+    }
+    this.size++;
     return this;
   }
 
@@ -27,3 +36,9 @@ class Queue {
 
   }
 }
+
+const q = new Queue();
+
+q.enqueue('FIRST');
+
+// console.log(q);
