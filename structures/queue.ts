@@ -32,13 +32,24 @@ class Queue {
     return this;
   }
 
-  dequeue(): QueueNode {
-
+  dequeue(): Pick<QueueNode, 'value'> | null {
+    if (!this.first) return null;
+    const temp = this.first;
+    if (this.first === this.last) {
+      this.last = null;
+    }
+    this.first = this.first.next;
+    this.size--;
+    return temp.value;
   }
 }
 
 const q = new Queue();
 
 q.enqueue('FIRST');
+q.enqueue('SECOND');
+q.enqueue('THIRD');
 
+// console.log(q.dequeue());
 // console.log(q);
+
