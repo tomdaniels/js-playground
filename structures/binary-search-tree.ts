@@ -45,19 +45,18 @@ class BinarySearchTree {
   find(val: any) {
     if (this.root === null) return undefined;
 
-    let current = this.root,
-      found = false;
-    while (current && !found) {
+    let current = this.root;
+    while (current) {
       if (val === current.value) return current;
       if (val < current.value) {
         (current as TreeNode | null) = current.left;
       } else if (val > current.value) {
         (current as TreeNode | null) = current.right;
       } else {
-        found = true;
+        return current;
       }
     }
-    return current;
+    return false;
   }
 }
 
@@ -66,4 +65,4 @@ tree.insert(10);
 tree.insert(5);
 tree.insert(12);
 
-// console.log(tree);
+console.log(tree.find(12));
