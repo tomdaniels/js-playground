@@ -42,19 +42,17 @@ class BinarySearchTree {
     }
   }
 
-  find(val: any) {
-    if (this.root === null) return undefined;
+  find(val: any, node: TreeNode | null = null): TreeNode | boolean {
+    if (this.root === null) return false;
 
-    let current = this.root;
-    while (current) {
-      if (val === current.value) return current;
-      if (val < current.value) {
-        (current as TreeNode | null) = current.left;
-      } else if (val > current.value) {
-        (current as TreeNode | null) = current.right;
-      } else {
-        return current;
-      }
+    let current = node || this.root;
+    if (val === current.value) return current;
+
+    if (val < current.value && current.left) {
+      return this.find(val, current.left);
+    }
+    if (val > current.value && current.right) {
+      return this.find(val, current.right);
     }
     return false;
   }
