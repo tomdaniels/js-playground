@@ -139,9 +139,9 @@ function getCol(idx, grid) {
 function validSolution(grid) {
   let passed = false;
   let subgridsToCheck = 9;
-  grid.every((row, i) => {
+  return grid.every((row, i) => {
     // horizontal
-    if (isValid(row)) {
+    if (isValid(...row)) {
       passed = true;
     }
 
@@ -165,7 +165,7 @@ function validSolution(grid) {
             .slice(x, y)
             .map((row) => row.slice(...subgrids[j]));
 
-          if (isValid(...subgrid.flat())) {
+          if (passed && isValid(...subgrid.flat())) {
             subgridsToCheck = 0;
             passed = true;
           } else {
@@ -175,11 +175,11 @@ function validSolution(grid) {
         subgridsToCheck--;
       });
     }
+    return passed;
   });
-  return passed;
 }
 
-console.log(validSolution(grid));
-console.log(validSolution(valid_grid));
+// console.log(validSolution(grid));
+// console.log(validSolution(valid_grid));
 
 // ---------------------------------- ^ sudoku ^ ---------------------------------- //
