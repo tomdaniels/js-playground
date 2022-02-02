@@ -17,29 +17,30 @@ class BinarySearchTree {
     this.root = null;
   }
 
-  insert(val: any) {
+  insert(val: any, _branch: TreeNode | null = null): BinarySearchTree {
     const node = new TreeNode(val);
     if (!this.root) {
       this.root = node;
       return this;
     }
-    let current = this.root;
-    while (true) {
-      if (val === current.value) return undefined;
-      if (val < current.value) {
-        if (current.left === null) {
-          current.left = node;
-          return this;
-        }
-        current = current.left;
-      } else if (val > current.value) {
-        if (current.right === null) {
-          current.right = node;
-          return this;
-        }
-        current = current.right;
+
+    let current = _branch || this.root;
+    if (val < current.value) {
+      if (!current.left) {
+        current.left = node;
+        return this;
       }
+      return this.insert(val, current.left);
     }
+    if (val > current.value) {
+      if (!current.right) {
+        current.right = node;
+        return this;
+      }
+      return this.insert(val, current.right);
+    }
+
+    return this;
   }
 
   find(val: any, _branch: TreeNode | null = null): TreeNode | boolean {
