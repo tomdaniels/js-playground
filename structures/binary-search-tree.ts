@@ -24,8 +24,8 @@ class BinarySearchTree {
       return this;
     }
     let current = this.root;
-    if (val === current.value) return undefined;
     while (true) {
+      if (val === current.value) return undefined;
       if (val < current.value) {
         if (current.left === null) {
           current.left = node;
