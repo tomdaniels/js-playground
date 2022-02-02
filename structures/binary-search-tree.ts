@@ -42,10 +42,10 @@ class BinarySearchTree {
     }
   }
 
-  find(val: any, node: TreeNode | null = null): TreeNode | boolean {
+  find(val: any, _branch: TreeNode | null = null): TreeNode | boolean {
     if (this.root === null) return false;
 
-    let current = node || this.root;
+    let current = _branch || this.root;
     if (val === current.value) return current;
 
     if (val < current.value && current.left) {
