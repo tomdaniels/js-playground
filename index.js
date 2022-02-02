@@ -1,17 +1,19 @@
 const moment = require('moment');
 
-// const todaysDate = moment().format('L'); 
+// const todaysDate = moment().format('L');
 
 const today = new Date();
 const todaysDate = today.toLocaleDateString();
-const twentyFourHours = new Date(today.setDate(today.getDate() + 1)).toLocaleDateString()
+const twentyFourHours = new Date(
+  today.setDate(today.getDate() + 1)
+).toLocaleDateString();
 
 // console.log(todaysDate)
 // console.log(twentyFourHours);
 
 // ---------------------------------- ^ DATE TIME TESTING ^ ---------------------------------- //
 
-const target = {sourceId: "CX-7532-UB", sourceType: "News - Index"};
+const target = { sourceId: 'CX-7532-UB', sourceType: 'News - Index' };
 
 const result = Object.entries(target)
   .map(([key, value]) => `${key}=${value.replace(' ', '')}`)
@@ -24,14 +26,13 @@ const { mapKeys, mapValues, stubFalse } = require('lodash');
 const obj = {
   header: 'sometihg',
   url: 'something',
-  displayCount: 4, 
+  displayCount: 4,
 };
 
 // mapKeys(obj, (keys) => console.log('keys', keys));
 // mapValues(obj, (keys) => console.log('values', keys));
 
 // ---------------------------------- ^ MAPKEYS/VALUES ^ ---------------------------------- //
-
 
 // create the alphabet
 
@@ -55,39 +56,43 @@ const alphaPosition = (item) => alphaMap;
 const template = require('lodash/template');
 
 const ratesTitle = template(
-  'home loan rates as low as <%= interestRate %>% p.a | <%= compRate %>% p.a comp rate',
+  'home loan rates as low as <%= interestRate %>% p.a | <%= compRate %>% p.a comp rate'
 );
 // ratesTitle({ interestRate: 1.88, compRate: 2.87 });
 
-
 // ---------------------------------- ^ TEMPLATES ^ ---------------------------------- //
 
-const map = fn => mappable => mappable.map(fn);
+const map = (fn) => (mappable) => mappable.map(fn);
 
-const pipe = (...fns) => x => fns.reduce((y, f) => f(y), x);
+const pipe =
+  (...fns) =>
+  (x) =>
+    fns.reduce((y, f) => f(y), x);
 const log = (...args) => console.log(args);
 
 const arr = [1, 2, 3, 4];
 
-const isEven = n => n % 2 === 0;
-const stripe = n => isEven(n) ? 'dark' : 'light';
+const isEven = (n) => n % 2 === 0;
+const stripe = (n) => (isEven(n) ? 'dark' : 'light');
 
 const stripeAll = map(stripe);
 const striped = stripeAll(arr);
 // log(striped);
 
-const double = n => n * 2;
+const double = (n) => n * 2;
 const doubleAll = map(double);
 const doubled = doubleAll(arr);
 // log(doubled);
-
 
 // ---------------------------------- ^ comp ^ ---------------------------------- //
 
 const once = require('lodash/once');
 // const { unique } = require('underscore');
 
-const call = once((thing) => {console.log(thing); return thing});
+const call = once((thing) => {
+  console.log(thing);
+  return thing;
+});
 
 // console.log(call(1));
 // console.log(call(2));
