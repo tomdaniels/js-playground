@@ -104,74 +104,77 @@ const grid = [
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
   [1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  [1, 2, 3, 4, 5, 6, 7, 8, 9],
 ];
 
-class SudokuSolver {
-  constructor(board) {
-    this.board = board;
-  }
+const valid_grid = [
+  [5, 3, 4, 6, 7, 8, 9, 1, 2],
+  [6, 7, 2, 1, 9, 5, 3, 4, 8],
+  [1, 9, 8, 3, 4, 2, 5, 6, 7],
+  [8, 5, 9, 7, 6, 1, 4, 2, 3],
+  [4, 2, 6, 8, 5, 3, 7, 9, 1],
+  [7, 1, 3, 9, 2, 4, 8, 5, 6],
+  [9, 6, 1, 5, 3, 7, 2, 8, 4],
+  [2, 8, 7, 4, 1, 9, 6, 3, 5],
+  [3, 4, 5, 2, 8, 6, 1, 7, 9],
+];
 
-  duplicates(...args) {
-    const lookup = {};
-    for (let item of args) {
-      lookup[item] = (lookup[item] || 0) + 1;
-    }
-    for (let key in lookup) {
-      if (lookup[key] >= 2) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  getCol(idx) {
-    var column = [];
-    for(var i = 0; i < this.board.length; i++){
-       column.push(this.board[i][idx]);
-    }
-    return column;
-  }
-  
-  validSolution() {
-    let passed = true;
-    let subgridsToCheck = 9;
-    this.board.every((row, i) => {
-      // horizontal
-      if (row.includes(0) || this.duplicates(row)) {
-        passed = false;
-        return false;
-      };
-      
-      // vertical
-      let column = this.getCol(i);
-      if (this.duplicates(...column)) {
-        passed = false;
-        return false;
-      }
-  
-      const subgrids = [[0,3],[3,6],[6,9]];
-      while (subgridsToCheck > 0) {
-        subgrids.every(([x, y]) => {
-          for (let j = 0; j < 3; j++) {
-            const subgrid = this.board.slice(x,y).map(row => row.slice(...subgrids[j]));
-            const block = [].concat(...subgrid); // no .flat support :sad_panda:
-            if (block.includes(0) || this.duplicates(...block)) {
-              subgridsToCheck = 0;
-              passed = false;
-              return false;
-            }
-          }
-          subgridsToCheck--;
-        });
-      }
-    });
-    return passed; 
-  }
+function isValid(...args) {
+  return args.reduce((acc, num) => acc + num) === 45;
 }
 
-const game = new SudokuSolver(grid);
-// console.log(game.validSolution());
+function getCol(idx, grid) {
+  var column = [];
+  for (var i = 0; i < grid.length; i++) {
+    column.push(grid[i][idx]);
+  }
+  return column;
+}
+
+function validSolution(grid) {
+  let passed = false;
+  let subgridsToCheck = 9;
+  grid.every((row, i) => {
+    // horizontal
+    if (isValid(row)) {
+      passed = true;
+    }
+
+    // vertical
+    let column = getCol(i, grid);
+    if (isValid(...column)) {
+      passed = true;
+    } else {
+      passed = false;
+    }
+
+    const subgrids = [
+      [0, 3],
+      [3, 6],
+      [6, 9],
+    ];
+    while (subgridsToCheck > 0) {
+      subgrids.every(([x, y]) => {
+        for (let j = 0; j < 3; j++) {
+          const subgrid = grid
+            .slice(x, y)
+            .map((row) => row.slice(...subgrids[j]));
+
+          if (isValid(...subgrid.flat())) {
+            subgridsToCheck = 0;
+            passed = true;
+          } else {
+            passed = false;
+          }
+        }
+        subgridsToCheck--;
+      });
+    }
+  });
+  return passed;
+}
+
+console.log(validSolution(grid));
+console.log(validSolution(valid_grid));
 
 // ---------------------------------- ^ sudoku ^ ---------------------------------- //
-
