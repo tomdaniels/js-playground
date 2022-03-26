@@ -11,6 +11,7 @@ tree.insert(6);
 tree.insert(8);
 tree.insert(3);
 
+// bfs = Breadth First Search.
 function bfs(root: TreeNode | null): any[] {
   let node = root;
   const visitedNodes = [];
