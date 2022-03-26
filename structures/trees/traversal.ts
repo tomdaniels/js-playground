@@ -2,7 +2,6 @@ import BTS, { TreeNode } from './binary-search-tree';
 import Queue from '../queue';
 
 const tree = new BTS();
-const q = new Queue();
 
 tree.insert(10);
 tree.insert(15);
@@ -12,8 +11,9 @@ tree.insert(8);
 tree.insert(3);
 
 // bfs = Breadth First Search.
-function bfs(root: TreeNode | null): any[] {
+function bfs(root: TreeNode | null): number[] {
   let node = root;
+  const q = new Queue();
   const visitedNodes = [];
 
   q.enqueue(node);
@@ -26,4 +26,24 @@ function bfs(root: TreeNode | null): any[] {
   return visitedNodes;
 }
 const visitedNodesInOrder = bfs(tree.root);
-console.log(visitedNodesInOrder)
+console.log('bfs: ', visitedNodesInOrder)
+
+// dsf = Depth First Search.
+/**
+ * PreOrder - visit the entire left side vertically, then right
+ *            same is true for all children
+ */
+function dsfPreOrder(root: TreeNode | null): number[] {
+  const nodesVisited: number[] = [];
+  
+  function traverse(node: TreeNode | null) {
+    if (!node) return;
+    nodesVisited.push(node.value);
+    if (node.left) traverse(node.left)
+    if (node.right) traverse(node.right)
+  }
+  traverse(root);
+  return nodesVisited;
+}
+const dfsPreOrderNodes = dsfPreOrder(tree.root);
+console.log('dfs_pre-order: ', dfsPreOrderNodes)
