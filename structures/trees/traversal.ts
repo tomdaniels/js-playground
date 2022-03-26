@@ -28,42 +28,30 @@ function bfs(root: TreeNode | null): number[] {
 const visitedNodesInOrder = bfs(tree.root);
 console.log('bfs: ', visitedNodesInOrder)
 
-// dfs = Depth First Search.
-/**
- * PreOrder - visit the entire left side vertically, then right
- *            same is true for all children. Mark each node as visited
- *            BEFORE you traverse the child nodes
- */
-function dfsPreOrder(root: TreeNode | null): number[] {
-  const nodesVisited: number[] = [];
-  
-  function traverse(node: TreeNode | null) {
-    if (!node) return;
-    nodesVisited.push(node.value);
-    if (node.left) traverse(node.left)
-    if (node.right) traverse(node.right)
-  }
-  traverse(root);
-  return nodesVisited;
+// dfs - Depth First Search.
+enum DFSMethod {
+  IN_ORDER = 'InOrder',
+  PRE_ORDER = 'PreOrder',
+  POST_ORDER = 'PostOrder'
 }
-const dfsPreOrderNodes = dfsPreOrder(tree.root);
-console.log('dfs_pre-order: ', dfsPreOrderNodes)
 
-/**
- * PostOrder - visit the entire left side vertically, then right
- *             same is true for all children. Mark each node as visisted
- *             AFTER you have traversed all the children.
- */
- function dfsPostOrder(root: TreeNode | null): number[] {
+function dfs(root: TreeNode | null, type: DFSMethod): number[] {
   const nodesVisited: number[] = [];
   
-  function traverse(node: TreeNode | null) {
-    if (node!.left) traverse(node!.left)
-    if (node!.right) traverse(node!.right)
-    nodesVisited.push(node!.value);
+  function traverse(node: TreeNode | null, type: DFSMethod) {
+    if (type === 'PreOrder') nodesVisited.push(node!.value); // pre order happens before you traverse all children 
+    if (node!.left) traverse(node!.left, type)
+    if (type === 'InOrder') nodesVisited.push(node!.value); // in order happens once the entire left side has been traversed
+    if (node!.right) traverse(node!.right, type)
+    if (type === 'PostOrder') nodesVisited.push(node!.value); // post order happens after you traverse all children
   }
-  traverse(root);
+  traverse(root, type);
   return nodesVisited;
 }
-const dfsPostOrderNodes = dfsPostOrder(tree.root);
-console.log('dfs_post-order: ', dfsPostOrderNodes)
+const preOrder = dfs(tree.root, DFSMethod.PRE_ORDER);
+const inOrder = dfs(tree.root, DFSMethod.IN_ORDER);
+const postOrder = dfs(tree.root, DFSMethod.POST_ORDER);
+
+console.log('dfs - pre order', preOrder);
+console.log('dfs - in order', inOrder);
+console.log('dfs - post order', postOrder);
