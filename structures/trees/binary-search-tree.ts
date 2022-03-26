@@ -1,4 +1,4 @@
-class TreeNode {
+export class TreeNode {
   value: any;
   left: TreeNode | null;
   right: TreeNode | null;
@@ -10,7 +10,7 @@ class TreeNode {
   }
 }
 
-class BinarySearchTree {
+export default class BinarySearchTree {
   root: TreeNode | null;
 
   constructor() {

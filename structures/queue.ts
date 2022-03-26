@@ -8,7 +8,7 @@ class QueueNode {
   }
 }
 
-class Queue {
+export default class Queue {
   first: QueueNode | null;
   last: QueueNode | null;
   size: number;
