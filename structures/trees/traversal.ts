@@ -28,12 +28,13 @@ function bfs(root: TreeNode | null): number[] {
 const visitedNodesInOrder = bfs(tree.root);
 console.log('bfs: ', visitedNodesInOrder)
 
-// dsf = Depth First Search.
+// dfs = Depth First Search.
 /**
  * PreOrder - visit the entire left side vertically, then right
- *            same is true for all children
+ *            same is true for all children. Mark each node as visited
+ *            BEFORE you traverse the child nodes
  */
-function dsfPreOrder(root: TreeNode | null): number[] {
+function dfsPreOrder(root: TreeNode | null): number[] {
   const nodesVisited: number[] = [];
   
   function traverse(node: TreeNode | null) {
