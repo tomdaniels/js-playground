@@ -46,5 +46,24 @@ function dfsPreOrder(root: TreeNode | null): number[] {
   traverse(root);
   return nodesVisited;
 }
-const dfsPreOrderNodes = dsfPreOrder(tree.root);
+const dfsPreOrderNodes = dfsPreOrder(tree.root);
 console.log('dfs_pre-order: ', dfsPreOrderNodes)
+
+/**
+ * PostOrder - visit the entire left side vertically, then right
+ *             same is true for all children. Mark each node as visisted
+ *             AFTER you have traversed all the children.
+ */
+ function dfsPostOrder(root: TreeNode | null): number[] {
+  const nodesVisited: number[] = [];
+  
+  function traverse(node: TreeNode | null) {
+    if (node!.left) traverse(node!.left)
+    if (node!.right) traverse(node!.right)
+    nodesVisited.push(node!.value);
+  }
+  traverse(root);
+  return nodesVisited;
+}
+const dfsPostOrderNodes = dfsPostOrder(tree.root);
+console.log('dfs_post-order: ', dfsPostOrderNodes)
