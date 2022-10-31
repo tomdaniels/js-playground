@@ -183,3 +183,47 @@ function validSolution(grid) {
 // console.log(validSolution(valid_grid));
 
 // ---------------------------------- ^ sudoku ^ ---------------------------------- //
+
+const values = require('lodash/values');
+
+const _arr = Object.values({
+  thing: 'one',
+  second: 'thing',
+  third: 'item',
+});
+const random = Math.floor(Math.random() * _arr.length);
+
+// console.log(_arr, random);
+
+// ---------------------------------- ^ random object value ^ ---------------------------------- //
+
+const generateDateRange = (from, modifier = 'day') => {
+  const dates = [];
+
+  let currentDate = moment(from);
+
+  const quarterly = modifier === 'quarterly';
+  const daily = modifier === 'daily';
+
+  let step = quarterly ? 3 : 1;
+  let _modifier = quarterly
+    ? 'month'
+    : daily
+    ? 'day'
+    : modifier.replace('ly', '');
+
+  let scheduleCount = 0;
+  while (scheduleCount < 3) {
+    dates.push(currentDate.format('YYYY-MM-DD'));
+    currentDate = currentDate.add(step, _modifier);
+    scheduleCount++;
+  }
+
+  return _modifier === 'once' ? dates.slice(0, 1) : dates;
+};
+
+// ['once', 'daily', 'weekly', 'monthly', 'quarterly'].forEach((f) =>
+//   console.log(generateDateRange('2018-11-07', f))
+// );
+
+// ---------------------------------- ^ recurring date ranges ^ ---------------------------------- //
