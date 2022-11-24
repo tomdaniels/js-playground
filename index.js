@@ -184,8 +184,6 @@ function validSolution(grid) {
 
 // ---------------------------------- ^ sudoku ^ ---------------------------------- //
 
-const values = require('lodash/values');
-
 const _arr = Object.values({
   thing: 'one',
   second: 'thing',
@@ -227,3 +225,30 @@ const generateDateRange = (from, modifier = 'day') => {
 // );
 
 // ---------------------------------- ^ recurring date ranges ^ ---------------------------------- //
+
+const Benchmark = require('benchmark');
+const suite = new Benchmark.Suite('mapVreduce');
+
+const collection = Array.from({ length: 100 }).map((_, i) => ({
+  key: i++,
+  checked: i % 3 === 0,
+}));
+
+suite
+  .add('Array.prototype.map', () => {
+    collection.map((x) => ({ ...x, checked: true }));
+  })
+  .add('Array.prototype.reduce', () => {
+    collection.reduce((a, c) => [...a, { ...c, checked: true }], []);
+  })
+  .on('cycle', (event) => {
+    const benchmark = event.target;
+    console.log(benchmark.toString());
+  })
+  .on('complete', (event) => {
+    const suite = event.currentTarget;
+    const fastestOption = suite.filter('fastest').map('name');
+    console.log(`The fastest option is ${fastestOption}`);
+  });
+// .run();
+// ---------------------------------- ^ map vs reduce ^ ---------------------------------- //
