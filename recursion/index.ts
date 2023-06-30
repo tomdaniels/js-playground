@@ -11,16 +11,15 @@ function collectOdds(arr: any[]): any[] {
 
   result = result.concat(collectOdds(arr.slice(1)));
   return result;
-};
+}
 
 // log(collectOdds([1,2,3,4,5]));
 
 // ---------------------------------- ^ collect odds recursion ^ ---------------------------------- //
 
-
 function power(base: number, exponent: number): number {
   if (exponent === 0) return 1;
-  return base * power(base, exponent -1);
+  return base * power(base, exponent - 1);
 }
 
 // log(
@@ -31,10 +30,9 @@ function power(base: number, exponent: number): number {
 
 // ---------------------------------- ^ powerOf w/ recursion ^ ---------------------------------- //
 
-
 function factorial(num: number): number {
   if (num === 1) return 1;
-  console.log(num -1);
+  console.log(num - 1);
   return num * factorial(num - 1);
 }
 

@@ -1,5 +1,4 @@
-const moment = require('moment');
-
+import moment from 'moment';
 // const todaysDate = moment().format('L');
 
 const today = new Date();
@@ -21,7 +20,8 @@ const result = Object.entries(target)
 
 // ---------------------------------- ^ QUERY PARAM TESTING ^ ---------------------------------- //
 
-const { mapKeys, mapValues, stubFalse } = require('lodash');
+// import mapKeys from 'lodash/mapKeys';
+// import mapValues from 'lodash/mapValues';
 
 const obj = {
   header: 'sometihg',
@@ -46,6 +46,7 @@ const alphaMap = alphabet.reduce((obj, item) => {
   return obj;
 }, {});
 
+// console.log(alphaMap);
 // map the string
 const testString = 'The sunsents ya bastard';
 const alphaPosition = (item) => alphaMap;
@@ -53,11 +54,11 @@ const alphaPosition = (item) => alphaMap;
 
 // ---------------------------------- ^ ALPHABET TEST ^ ---------------------------------- //
 
-const template = require('lodash/template');
+// import { template } from 'lodash';
 
-const ratesTitle = template(
-  'home loan rates as low as <%= interestRate %>% p.a | <%= compRate %>% p.a comp rate'
-);
+// const ratesTitle = template(
+//   'home loan rates as low as <%= interestRate %>% p.a | <%= compRate %>% p.a comp rate'
+// );
 // ratesTitle({ interestRate: 1.88, compRate: 2.87 });
 
 // ---------------------------------- ^ TEMPLATES ^ ---------------------------------- //
@@ -86,13 +87,13 @@ const doubled = doubleAll(arr);
 
 // ---------------------------------- ^ comp ^ ---------------------------------- //
 
-const once = require('lodash/once');
-// const { unique } = require('underscore');
+// import { once } from 'lodash';
+// import { unique } from 'underscore';
 
-const call = once((thing) => {
-  console.log(thing);
-  return thing;
-});
+// const call = once((thing) => {
+//   console.log(thing);
+//   return thing;
+// });
 
 // console.log(call(1));
 // console.log(call(2));
@@ -226,7 +227,7 @@ const generateDateRange = (from, modifier = 'day') => {
 
 // ---------------------------------- ^ recurring date ranges ^ ---------------------------------- //
 
-const Benchmark = require('benchmark');
+import Benchmark from 'benchmark';
 const suite = new Benchmark.Suite('mapVreduce');
 
 const collection = Array.from({ length: 100 }).map((_, i) => ({
@@ -252,3 +253,65 @@ suite
   });
 // .run();
 // ---------------------------------- ^ map vs reduce ^ ---------------------------------- //
+
+import spinner from 'cli-spinners';
+import logUpdate from 'log-update';
+/*
+{
+	interval: 80,
+	frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏']
+}
+*/
+const { frames, interval } = spinner[process.argv[2] || 'dots'];
+
+let intervalId;
+let index = 0;
+
+// intervalId = setInterval(() => {
+//   index = ++index % frames.length;
+//   let updateString = `${frames[index]} some progress state ${index}/Infinity`;
+//   logUpdate(updateString);
+// }, interval);
+
+// setTimeout(() => {
+//   clearInterval(intervalId);
+// }, 3500); //arbitrary
+
+// ---------------------------------- ^ cli spinners ^ ---------------------------------- //
+import _ from 'lodash';
+const renderingSpec = {
+  version: 1,
+  title: 'new sdk title',
+  channels: { x: { labelOverride: 'new label' } },
+  axes: { x: { labelAngle: 'horizontal' } },
+  options: {
+    legendPosition: 'bottom',
+  },
+  property: null,
+};
+
+function getObjectKeysDeep(object, index = 0, keys = []) {
+  const pair = _.toPairs(object)[index];
+  if (!pair || pair.length === 0) return keys;
+
+  const [key, value] = pair;
+  if (!_.isPlainObject(value) || Array.isArray(value) || value === null) {
+    keys.push(key);
+  } else {
+    getObjectKeysDeep(value, 0, keys);
+  }
+
+  index++;
+  return getObjectKeysDeep(object, index, keys);
+}
+
+// console.log(getObjectKeysDeep(renderingSpec));
+
+// ---------------------------------- ^ recursive object keys ^ ---------------------------------- //
+
+const list = new Map([
+  ['filename', [1,2,3]],
+  ['other', [4,5]]
+])
+
+console.log([...list.keys()]);

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
@@ -14,7 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "benchmark": "^2.1.4",
+    "cli-spinners": "^2.7.0",
     "lodash": "^4.17.21",
+    "log-update": "^5.0.1",
     "moment": "^2.29.4"
   },
   "devDependencies": {
